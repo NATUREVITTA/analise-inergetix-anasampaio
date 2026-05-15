@@ -19,7 +19,7 @@ CAMINHO_LOGO = "logo.png"
 ARQUIVO_HISTORICO = "historico_analises.txt"
 ENDERECO_FIXO = "Atendimento On-line"
 INSTA_FIXO = "@ana.essenciaevida"
-ZAP_FIXO = "41 99775 6683"
+ZAP_FIXO = "41 99775-6683"
 NOME_TERAPEUTA_FIXO = "Ana Sampaio"
 
 # --- FUNÇÕES DE PERSISTÊNCIA ---
@@ -79,7 +79,7 @@ def gerar_pdf(texto_analise, dados_usuario, nome_terapeuta, info_rodape):
     data_formatada = dados_usuario['nascimento'].strftime('%d/%m/%Y')
     
     pdf.set_font("Arial", "B", 11)
-    pdf.cell(0, 8, f"Cliente: {dados_usuario['nome']}", ln=True)
+    pdf.cell(0, 8, f"Paciente: {dados_usuario['nome']}", ln=True)
     pdf.set_font("Arial", "", 10)
     pdf.cell(0, 6, f"Data de Nascimento: {data_formatada} ({dados_usuario['idade']} anos)", ln=True)
     pdf.cell(0, 6, f"Sexo: {dados_usuario['sexo']}", ln=True)
@@ -125,7 +125,7 @@ with st.sidebar:
 
     st.divider()
     st.title("⚙️ Dados Fixos")
-    nome_terapeuta = st.text_input("Consultora", NOME_TERAPEUTA_FIXO)
+    nome_terapeuta = st.text_input("Terapeuta", NOME_TERAPEUTA_FIXO)
     endereco = st.text_input("Endereço", ENDERECO_FIXO)
     insta = st.text_input("Instagram", INSTA_FIXO)
     tel = st.text_input("WhatsApp", ZAP_FIXO)
@@ -316,6 +316,6 @@ if "analise_atual" in st.session_state:
     st.download_button(
         label="📥 Baixar Relatório em PDF",
         data=st.session_state["pdf_bytes"],
-        file_name=f"Relatorio_Core_{nome_paciente.replace(' ', '_')}.pdf",
+        file_name=f"Relatorio_{nome_paciente.replace(' ', '_')}.pdf",
         mime="application/pdf"
     )
